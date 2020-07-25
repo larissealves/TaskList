@@ -1,0 +1,19 @@
+{% extends 'AppTaskList/base.html' %}
+{% block content %}
+
+<div>
+    <h4>{{ task.title }}</h4>
+    </div>
+
+    <h4>Descrição:</h4>
+    <div class="border" id="publicacao">
+    <ul>
+        <p>{{description.description}}  </p>
+    </ul>
+    </div>
+    <a href="{% url 'update_task' task.id %}">Update</a>
+    <a href="{% url 'delete' task.id %}">Delete</a>
+    <a href="{% url 'create_description' %}"> ADC Description </a>
+       
+</div>
+{% endblock %}

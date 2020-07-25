@@ -1,0 +1,6 @@
+<form method="POST" action="/">
+    {% csrf_token %}
+     {{form.description}}
+     {{form.rel}}
+    <input type="submit" name="Create Description">
+</form>
