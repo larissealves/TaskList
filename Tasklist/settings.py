@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'q#l5bxyzn^ln=r7+^v%asf8t*9r#2th^b(imant!$z^un7di2@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['task-list-todo-app.herokuapp.com/', '127.0.0.1']
 
