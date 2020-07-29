@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Task, Description
 from .forms import TaskForm, DescriptionForm
-
+from django.views.generic import TemplateView, FormView
 
 def index(request):
     tasks = Task.objects.all()
@@ -43,19 +43,22 @@ def deleteTask (request, pk):
     context = {'item':item}
     return render(request, 'AppTaskList/delete.html', context)
 
-def createDescriptions(request):
-    descrip = Description.objects.all()
+class createDescriptions(FormView):
+    form_class = DescriptionForm
 
-    form = DescriptionForm()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        desc = Task.objects.get(pk=self.kwargs['pk'])
+        context['desc'] = desc
+        return context
 
-    if request.method == "POST":
-        form = DescriptionForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('/')
+    def form_valid (self, form):
+        pk = self.kwargs['pk']
+        dados = form.clean()
+        task_id = Task.objects.get(id=pk)
+        description = Description(description=dados['description'])
+        description.save()
 
-    context = {'descrip':descrip, 'form':form}
-    return render(request, 'AppTaskList/createForm.html', context)
 
 def details (request, pk):
     try:
