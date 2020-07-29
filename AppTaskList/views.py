@@ -43,7 +43,7 @@ def deleteTask (request, pk):
     context = {'item':item}
     return render(request, 'AppTaskList/delete.html', context)
 
-class createDescriptions(FormView):
+'''class createDescriptions(FormView):
     form_class = DescriptionForm
 
     def get_context_data(self, **kwargs):
@@ -58,7 +58,7 @@ class createDescriptions(FormView):
         task_id = Task.objects.get(id=pk)
         description = Description(description=dados['description'])
         description.save()
-
+'''
 
 def details (request, pk):
     try:
