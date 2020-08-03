@@ -43,28 +43,8 @@ def deleteTask (request, pk):
     context = {'item':item}
     return render(request, 'AppTaskList/delete.html', context)
 
-'''class createDescriptions(FormView):
-    form_class = DescriptionForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        desc = Task.objects.get(pk=self.kwargs['pk'])
-        context['desc'] = desc
-        return context
-
-    def form_valid (self, form):
-        pk = self.kwargs['pk']
-        dados = form.clean()
-        task_id = Task.objects.get(id=pk)
-        description = Description(description=dados['description'])
-        description.save()
-'''
 
 def details (request, pk):
-    try:
-        description = Description.objects.get(id=pk)
-        task = Task.objects.get(description=pk)
-
-    except Exception as identifier:
-        pass
+    description = Description.objects.get(id=pk)
+    task = Task.objects.get(description=pk)
     return render(request, 'AppTaskList/details.html', {'task':task, 'description':description})

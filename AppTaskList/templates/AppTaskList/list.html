@@ -1,39 +1,25 @@
 {% extends 'AppTaskList/base.html' %}
-{% block title %}List Takes{% endblock %}
-
-
+{% block title %}Taske List{% endblock %}
 {% block content %}
 
-<h1> List Task</h1>
-
-    <section class="form">
+    <section class="task_list">
+        <h1> Task List</h1>
             <form method="POST" action="/">
-                {% csrf_token %}
-                {{form.title}} 
-                <div class="button">
+                    {% csrf_token %}
+                    {{form.title}} 
                     <input type="submit" name="Create Task" id="input">
-                </div>
             </form> 
+            
+        {% for task in tasks %}
+                <div class="title_task"> 
+                    <div>           
+                        {% if task.complete == True %}
+                            <strike>{{task}}</strike>
+                        {% else %}
+                            <p>{{task}} <p> </p>
+                        {% endif %}               
+                    </div>
+                </div>
+        {% endfor %}
     </section>
-<section class="task_list">
-    {% for task in tasks %}
-    <div class="title_details">
-        <div class="title_task">           
-            {% if task.complete == True %}
-                <strike>{{task}}</strike>
-                {% else %}
-                <p>{{task}}</p>
-            {% endif %}
-        </div>
-        <div class="details">
-            <div class="a"><a href="{% url 'details' task.id %}"> Detalhe </a></div>
-        </div>
-    {% endfor %}
-
-
-
-   
-
-    {% endblock %}
-    
-</section>
+{% endblock %}
